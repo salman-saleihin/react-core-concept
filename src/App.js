@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
   var person ={
@@ -43,6 +44,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <Counter></Counter>
         <h1>Getting Started With React</h1>
         <h3 className='' style={style}>Hello ! I am {person.name} and Professionally I'm a {person.job}</h3>
         <p style={{backgroundColor : 'Yellow' , color : 'red'}}>I've Completed my HSC from : {institute1.name + "," + institute1.location}</p>
@@ -76,6 +78,24 @@ function App() {
       </header>
     </div>
   );
+}
+
+function Counter(){
+  const [count , setCount] = useState(0);
+  const handleIncrease = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+  }
+  const handleDecrease = () => setCount(count - 1) ;
+
+  return (
+    
+    <div>
+      <h6>Count : {count}</h6>
+      <button onClick={handleDecrease}>Decrease</button>
+      <button onClick={handleIncrease}>Increase</button>
+    </div>
+  )
 }
 
 function Products(props){
