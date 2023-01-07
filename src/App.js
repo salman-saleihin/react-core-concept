@@ -1,25 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   var person ={
     name : "Saleihin Khan" ,
     job : "Student"
   }
-
   var institute1 = {
     name : "BAF Shaheen College" ,
     location : "Dhaka" ,
-
-
   }
-
   var institute2 = {
     location : "Kushtia" ,
     name : "Zilla School"
   }
-
   var style = {
     color : "red",
     backgroundColor : 'black' 
@@ -75,6 +70,7 @@ function App() {
         <Products product={products[1]}></Products>
         <Products product={products[2]}></Products> */}
         
+        <Users></Users>
       </header>
     </div>
   );
@@ -89,7 +85,7 @@ function Counter(){
   const handleDecrease = () => setCount(count - 1) ;
 
   return (
-    
+
     <div>
       <h6>Count : {count}</h6>
       <button onClick={handleDecrease}>Decrease</button>
@@ -132,6 +128,26 @@ function Education(props){
     <h3>Board : {props.board} || Year :{props.year}</h3>
     <h2>Result : {props.result}</h2>
   </div>
+}
+
+function Users (){
+  const [users , setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => setUsers(data));
+  }, [])
+
+  return (
+    <div>
+      <h3> Dynamic Users : {users.length}</h3>
+     <ul>
+      {
+        users.map(user => <li><strong>User Name :</strong>{user.name} ||<strong>Email :</strong>{user.email}</li>)
+      }
+     </ul>
+    </div>
+  )
 }
 
 export default App;
